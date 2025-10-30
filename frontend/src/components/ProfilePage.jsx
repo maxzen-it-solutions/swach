@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Pencil } from "lucide-react";
 import { useGetUserByIdQuery, useUpdateUserMutation } from "../services/profileApi";
+// import { useEffect } from "react";
 
 function ProfilePage() {
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const userId = localStorage.getItem("userId"); // logged-in user ID
   const token = localStorage.getItem("token");   // JWT token
 

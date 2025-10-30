@@ -3,8 +3,14 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { useSignupMutation } from "../services/apiService";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 function Register() {
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  
   const navigate = useNavigate();
   const [signup, { isLoading, isError, error }] = useSignupMutation();
 

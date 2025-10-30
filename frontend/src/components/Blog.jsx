@@ -144,11 +144,13 @@
 
 import React from 'react'
 import ProductCard from './ProductDetail2'
+import Termsandconditions from './Termsandconditions';
 
 function Blog() {
   return (
     <div>   
-<ProductCard/>  
+<ProductCard/> 
+<Termsandconditions/> 
     </div>
   )
 }

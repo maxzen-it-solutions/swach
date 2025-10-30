@@ -23,6 +23,7 @@ const ScrollToTop = () => {
 
   return (
     visible && (
+      
       <button
         onClick={scrollToTop}
         className="fixed bottom-6 right-6 p-3 rounded-full bg-[#FF9933] text-white shadow-lg hover:bg-orange-600 transition"

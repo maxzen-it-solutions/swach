@@ -74,7 +74,7 @@ function Creambodyone() {
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Shilajit Resin</h3>
             <div className="overflow-hidden rounded-2xl mb-4">
               <img
-                src={shil1}
+                src={shil1  }
                 alt="Shilajit Resin"
                 className="w-full object-contain max-h-60 sm:max-h-80 "
               />

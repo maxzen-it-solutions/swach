@@ -7,6 +7,7 @@ import Greenbodytwo from '../../src/components/Greenbodytwo';
 import HomePage from '../../src/components/Homepage';
 
 
+
 function AllPages(){
     return (
         <div>

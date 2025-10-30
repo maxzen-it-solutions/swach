@@ -8,6 +8,8 @@ const productSchema = new mongoose.Schema({
     {
       quantity: { type: String, required: true }, // e.g., "10g", "20g"
       price: { type: Number, required: true },
+            discount: { type: Number, default: 0 }, // Add discount field, default to 0 if no discount
+
     },
   ],
 });

@@ -5,60 +5,52 @@ import { ShoppingCart, User } from "lucide-react";
 import LoginOptionsModal from "./Loginoptions";
 
 function Header() {
-  const [openDropdown, setOpenDropdown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const navigate = useNavigate();
-  const dropdownRef = useRef(null);
-  const profileRef = useRef(null);
-
-  // ✅ Cart items state
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // ✅ Check login state on mount
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+  const profileRef = useRef(null);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    const userId = localStorage.getItem("userId");
     setIsLoggedIn(!!token);
-    console.log("User role:", role, "UserId:", userId);
   }, []);
 
-  // ✅ Sync cart with localStorage + custom event
   useEffect(() => {
     const handleCartUpdate = () => {
       const savedCart = localStorage.getItem("cartItems");
       setCartItems(savedCart ? JSON.parse(savedCart) : []);
     };
-
     window.addEventListener("cartUpdated", handleCartUpdate);
     window.addEventListener("storage", handleCartUpdate);
-
     handleCartUpdate();
-
     return () => {
       window.removeEventListener("cartUpdated", handleCartUpdate);
       window.removeEventListener("storage", handleCartUpdate);
     };
   }, []);
 
-  // ✅ Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("userId");
+    localStorage.removeItem("cartItems")
+    localStorage.removeItem("checkoutItems")
+    localStorage.removeItem("rzp_checkout_anon_id")
+    localStorage.removeItem("rzp_device_id")
+    localStorage.removeItem("rzp_stored_checkout_id")
     setIsLoggedIn(false);
     navigate("/");
     window.location.reload();
   };
 
-  // ✅ Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (
@@ -67,7 +59,6 @@ function Header() {
         profileRef.current &&
         !profileRef.current.contains(e.target)
       ) {
-        setOpenDropdown(false);
         setProfileMenu(false);
       }
     }
@@ -75,59 +66,70 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ NavLink style helper
+  // Desktop NavLink class (with pseudo-element effect)
   const navLinkClasses = ({ isActive }) =>
-    `relative px-3 py-1 transition-all duration-300 ${
+    `relative px-3 py-1 transition-all duration-300 border rounded-md ${
       isActive
-        ? "text-white before:absolute before:inset-0 before:rounded-md before:bg-[#667D60] before:-z-10 before:scale-x-100 before:opacity-100"
-        : "hover:text-white before:absolute before:inset-0 before:rounded-md before:bg-[#667D60] before:-z-10 before:scale-x-0 before:opacity-0 hover:before:scale-x-100 hover:before:opacity-100"
+        ? "text-white border-[#667D60] before:absolute before:inset-0 before:rounded-md before:bg-[#667D60] before:-z-10 before:scale-x-100 before:opacity-100"
+        : "border-transparent hover:text-black hover:border-[#667D60] before:absolute before:inset-0 before:rounded-md before:-z-10 before:scale-x-0 before:opacity-0 hover:before:scale-x-100 hover:before:opacity-100"
     } before:transition-transform before:duration-300 before:origin-left`;
+
+  // Mobile NavLink class (border only on hover, active has background)
+  const mobileNavLinkClasses = ({ isActive }) =>
+    `relative px-3 py-2 transition-all duration-300 border border-transparent font-semibold ${
+      isActive
+        ? "bg-[#667D60] text-white rounded-md"
+        : "hover:border-[#667D60] hover:text-[#667D60]"
+    }`;
 
   return (
     <div className="sticky top-0 z-50">
       {/* Top Bar */}
       <div className="card shadow-lg bg-[#667D60] w-full h-12 flex items-center overflow-hidden relative">
-        <p className="text-white font-semibold whitespace-nowrap animate-marquee">
-          ⭐ The Swacchh Products - From Soil to Soul ⭐
-        </p>
-
+        <div className="animate-marquee flex whitespace-nowrap">
+          {Array(4)
+            .fill("⭐ The Swacchh Products - From Soil to Soul ⭐")
+            .map((text, i) => (
+              <span key={i} className="text-white font-semibold mx-8">
+                {text}
+              </span>
+            ))}
+        </div>
         <style>
           {`
             @keyframes marquee {
-              0%   { transform: translateX(-20%); }
+              0% { transform: translateX(-50%); }
               100% { transform: translateX(100%); }
             }
             .animate-marquee {
-              display: inline-block;
               min-width: 80%;
-              animation: marquee 12s linear infinite;
+              display: flex;
+              animation: marquee 20s linear infinite;
             }
           `}
         </style>
       </div>
 
       {/* Main Navbar */}
-      <div className="card shadow-lg bg-[#f8f5ee] w-full h-24 relative z-50">
+      <div className="card shadow-lg bg-[#f8f5ee] w-full md:h-20 relative z-50">
         <div className="flex justify-between items-center px-6 md:px-10 h-full">
           {/* Logo */}
           <Link to="/" onClick={() => setMenuOpen(false)}>
             <img
               src={logo}
               alt="Logo"
-              className="w-20 h-20 md:w-20 md:h-16 xl:w-28 xl:h-24 lg:w-24 lg:h-24 cursor-pointer"
+              className="w-20 h-20 md:w-20 md:h-16 xl:w-28 xl:h-20 lg:w-24 lg:h-20 cursor-pointer"
             />
           </Link>
 
-          {/* Desktop / Tablet Nav */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex lg:flex flex-row items-center md:space-x-2 xl:space-x-8 lg:space-x-6 font-bold text-gray-700 relative">
             <NavLink to="/" end className={navLinkClasses}>
               Home
             </NavLink>
-            <div className="relative" ref={dropdownRef}>
-              <NavLink to="/products" className={navLinkClasses}>
-                Products
-              </NavLink>
-            </div>
+            <NavLink to="/products" className={navLinkClasses}>
+              Products
+            </NavLink>
             <NavLink to="/about" className={navLinkClasses}>
               About Us
             </NavLink>
@@ -139,9 +141,8 @@ function Header() {
             </NavLink>
           </div>
 
-          {/* Right Side (Desktop / Tablet) */}
+          {/* Right side */}
           <div className="hidden md:flex items-center md:space-x-4 lg:space-x-6 xl:space-x-6">
-            {/* Cart */}
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-8 h-8 text-green-700" />
               {cartItems.length > 0 && (
@@ -160,7 +161,6 @@ function Header() {
                   <User className="w-6 h-6" />
                 </button>
 
-                {/* Profile Dropdown */}
                 <div
                   className={`absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 transform transition-all duration-300 ease-out origin-top-right ${
                     profileMenu
@@ -221,35 +221,35 @@ function Header() {
           <NavLink
             to="/"
             end
-            className={navLinkClasses}
+            className={mobileNavLinkClasses}
             onClick={() => setMenuOpen(false)}
           >
             Home
           </NavLink>
           <NavLink
             to="/products"
-            className={navLinkClasses}
+            className={mobileNavLinkClasses}
             onClick={() => setMenuOpen(false)}
           >
             Products
           </NavLink>
           <NavLink
             to="/about"
-            className={navLinkClasses}
+            className={mobileNavLinkClasses}
             onClick={() => setMenuOpen(false)}
           >
             About Us
           </NavLink>
           <NavLink
             to="/blog"
-            className={navLinkClasses}
+            className={mobileNavLinkClasses}
             onClick={() => setMenuOpen(false)}
           >
             Blog
           </NavLink>
           <NavLink
             to="/contact"
-            className={navLinkClasses}
+            className={mobileNavLinkClasses}
             onClick={() => setMenuOpen(false)}
           >
             Contact Us

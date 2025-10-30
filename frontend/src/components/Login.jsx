@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { useLoginMutation } from "../services/apiService"; // <-- RTK Query hook
+import {useEffect} from "react";
 
 function Login() {
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const navigate = useNavigate();
   const [login, { isLoading, isError, error }] = useLoginMutation();
   const location = useLocation();

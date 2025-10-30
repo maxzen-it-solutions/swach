@@ -34,7 +34,7 @@ import Products from "./components/Products";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Blog from "./components/Blog";
-import ProductDetail1 from "./components/ProductDetail1";
+// import ProductDetail1 from "./components/ProductDetail1";
 import ProductDetail2 from "./components/ProductDetail2";
 import ProfilePage from "./components/ProfilePage";
 import Cart from "./components/Cart";
@@ -50,6 +50,12 @@ import CelebrityLeads from "./admin/components/CelebrityLeads";
 import Coupons from "./admin/components/Coupons";
 import ScrollToTop from "./components/ScrollToTop";
 import PhoneLogin from "./components/Phonelogin";
+import ProductDetail from "./components/ProductDetail";
+import TermsPage from "./components/TermsPage";
+import Refundpolicypage from "./components/Refundpolicypage";
+import Returnpolicypage from "./components/Returnpolicypage";
+import Shippingpolicypage from "./components/Shippingpolicypage";
+import Privacypolicypage from "./components/Privacypolicypage";
 // 🔹 ProtectedRoute Component
 const ProtectedRoute = ({ children, role }) => {
   const token = localStorage.getItem("token");
@@ -68,20 +74,27 @@ const router = createBrowserRouter([
     element: <App />, // Public Layout
     children: [
       { index: true, element: <Home /> },
-            {path: "login", element: <Login /> }, // Example public route
+      {path: "login", element: <Login /> }, // Example public route
       {path: "register", element: <Register /> },
       {path: "about", element: <About /> },
       {path: "contact", element: <Contact /> },
       {path: "blog", element: <Blog /> },
-      {path: "productDetail1", element: <ProductDetail1 /> },
+      {path: "productDetail", element: <ProductDetail /> },
       {path: "productDetail2", element: <ProductDetail2 /> },
       {path: "myorders", element: <ProtectedRoute><Myorders /></ProtectedRoute> },
       { path: "Profilepage", element: <ProtectedRoute><ProfilePage /></ProtectedRoute> },
       { path: "products", element: <Products /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <ProtectedRoute><CheckOut /></ProtectedRoute>  },
+      {path: "product/:id", element: <ProductDetail /> },
       {path:"scrolltotop", element:<ScrollToTop /> },
-      {path:"login-phone", element:<PhoneLogin /> }
+      {path:"login-phone", element:<PhoneLogin /> },
+      {path: "TermsPage", element: <TermsPage /> },
+      {path: "Refundpolicypage", element: <Refundpolicypage /> },
+      {path: "Returnpolicypage", element: <Returnpolicypage /> },
+      {path: "Shippingpolicypage", element: <Shippingpolicypage/> },
+      {path: "Privacypolicypage", element: <Privacypolicypage /> },
+    
     ],
   },
 

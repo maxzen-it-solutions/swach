@@ -44,4 +44,4 @@ function LoginOptionsModal({ onClose }) {
   );
 }
 
-export default LoginOptionsModal;
+export default LoginOptionsModal                                                                                                                                                                                                                                        ;

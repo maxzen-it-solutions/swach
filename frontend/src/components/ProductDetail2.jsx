@@ -12,19 +12,28 @@ import SA3 from "../assets/SA3.webp";
 import saf3 from "../assets/saf3.jpg";
 import icon from "../assets/icon.png";
 import icon3 from "../assets/icon3.png";
-import { Link } from "react-router-dom";
+import shi1 from "../assets/1.jpg";
+import shi2 from "../assets/2.jpg";
+import shi3 from "../assets/3.jpg";
+import shi4 from "../assets/4.jpg";
+import shi5 from "../assets/5.jpg";
+import { useEffect } from "react";
 
 function ProductCard() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Manage main image state
   const [mainImage, setMainImage] = useState(shilM);
 
-  const thumbnails = [sh, SH2, SH3, shil3];
+  const thumbnails = [shi1, shi2, shi3, shi4];
 
   const [mainImages, setMainImages] = useState(SA3);
 
-   const thumbnailstwo=[SA1,saf1,saf2,saf3,];
+  const thumbnailstwo = [SA1, saf1, saf2, saf3,];
 
-  
+
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -44,7 +53,7 @@ function ProductCard() {
 
             </div>
             <h1 className="text-4xl md:text-6xl xl:mr-28  text-right font-bold mb-6 leading-tight">
-               Shilajit – Nature’s Ancient Energy Booster
+              Shilajit – Nature’s Ancient Energy Booster
             </h1>
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0">
               Pure Himalayan Shilajit Resin – the powerhouse of minerals and
@@ -67,7 +76,7 @@ function ProductCard() {
                 <motion.img
                   src={mainImage}
                   alt="Shilajit"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain object-center"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.8, ease: "easeInOut" }}
                 />
@@ -82,9 +91,8 @@ function ProductCard() {
                   src={img}
                   alt={`Shilajit thumbnail ${index + 1}`}
                   className={`w-20 h-20 rounded-xl object-cover shadow-md cursor-pointer border-2 
-              ${
-                mainImage === img ? "border-yellow-400" : "border-transparent"
-              } hover:border-white`}
+              ${mainImage === img ? "border-yellow-400" : "border-transparent"
+                    } hover:border-white`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{
@@ -174,20 +182,20 @@ function ProductCard() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Text */}
           <motion.div
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1, ease: "easeOut" }}
-  className="text-center md:text-left"
->
-  <h1 className="text-4xl md:text-6xl text-right font-bold mb-6 leading-tight">
-    Saffron – The Golden Spice of Wellness
-  </h1>
-  <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0">
-    Premium Kashmiri Saffron – rich in antioxidants, supports glowing skin ,
-    uplifts mood , and improves digestion . A natural spice for health,
-    vitality, and luxury living.
-  </p>
-</motion.div>
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center md:text-left"
+          >
+            <h1 className="text-4xl md:text-6xl text-right font-bold mb-6 leading-tight">
+              Saffron – The Golden Spice of Wellness
+            </h1>
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0">
+              Premium Kashmiri Saffron – rich in antioxidants, supports glowing skin ,
+              uplifts mood , and improves digestion . A natural spice for health,
+              vitality, and luxury living.
+            </p>
+          </motion.div>
 
 
           {/* Right Side: Image + Thumbnails */}
@@ -219,9 +227,8 @@ function ProductCard() {
                   src={img}
                   alt={`Shilajit thumbnail ${index + 1}`}
                   className={`w-20 h-20 rounded-xl object-cover shadow-md cursor-pointer border-2 
-              ${
-                mainImages === img ? "border-yellow-400" : "border-transparent"
-              } hover:border-white`}
+              ${mainImages === img ? "border-yellow-400" : "border-transparent"
+                    } hover:border-white`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{

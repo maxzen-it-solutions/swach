@@ -1,3 +1,4 @@
+/* 🌿 Basic App Structure */
 .App {
   text-align: center;
 }
@@ -7,6 +8,7 @@
   pointer-events: none;
 }
 
+/* 🔄 Logo Animation (default React) */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -28,6 +30,7 @@
   color: #61dafb;
 }
 
+/* 🔁 Default React Animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +38,48 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ✨ Added Custom Animations for PoliciesPreview */
+
+/* Smooth slide-down animation for dropdown content */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s ease-in-out;
+}
+
+/* Smooth slide-up animation when collapsing (optional but nice) */
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-in-out forwards;
+}
+
+/* Optional: Global transition smoother for buttons, links, and hover states */
+button,
+a {
+  transition: all 0.3s ease;
 }

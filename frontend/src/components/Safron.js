@@ -18,7 +18,7 @@ function Safron() {
   }, []);
 
   return (
-    <div className="relative w-full h-64 sm:h-80 md:h-[32rem] overflow-hidden shadow-xl rounded-xl">
+    <div className="relative w-full h-64 sm:h-80 md:h-[32rem] overflow-hidden shadow-xl">
       {/* Slide */}
       <div className="absolute inset-0">
         <video

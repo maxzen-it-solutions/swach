@@ -5,8 +5,12 @@ import OpenRaz from "../Thirdparty/Razorpay/OpenRaz";
 import { useGetCouponsQuery } from "../services/couponsApi";
 // import { useAddOrderMutation } from "../services/ordersApi";
 
-
 const CheckoutPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [cartItems, setCartItems] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [placingOrder, setPlacingOrder] = useState(false);
@@ -14,13 +18,13 @@ const CheckoutPage = () => {
   const [payement, setPayment] = useState("");
   const [update, setupdate] = useState([]);
 
-  // coupon states
+  // Coupon states
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [error, setError] = useState("");
 
-  // fetch all coupons
+  // Fetch all coupons
   const { data: coupons } = useGetCouponsQuery();
 
   // ✅ Load cart from localStorage
@@ -29,12 +33,17 @@ const CheckoutPage = () => {
     setCartItems(stored);
   }, []);
 
-  // ✅ Total calculation
+  // ✅ Calculate subtotal (with item-level discounts)
+  const baseprice = cartItems.reduce(
+    (sum, item) => sum + Math.floor(item.price) * (item.qty || 1),
+    0
+  );
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.price || 0) * (item.qty || 1),
+    (sum, item) => sum + (item.price - (item.price * item.discount) / 100) * (item.qty || 1),
     0
   );
 
+  // ✅ Apply coupon discount (based on subtotal after item-level discounts)
   const total = Math.max(subtotal - discount, 0); // never negative
 
   // ✅ Apply coupon
@@ -73,22 +82,21 @@ const CheckoutPage = () => {
       return;
     }
 
-    // ✅ Apply percentage discount
-    const calcDiscount = (subtotal * found.discount) / 100;
+    // ✅ Apply coupon percentage discount
+    const calcCouponDiscount = (subtotal * found.discount) / 100;
 
     setError("");
-    setDiscount(calcDiscount);
+    setDiscount(calcCouponDiscount);
     setAppliedCoupon(found);
   };
 
-  // ✅ Recalculate discount when subtotal changes
+  // ✅ Recalculate coupon discount when subtotal changes
   useEffect(() => {
     if (appliedCoupon) {
-      const calcDiscount = (subtotal * appliedCoupon.discount) / 100;
-      setDiscount(calcDiscount);
+      const calcCouponDiscount = (subtotal * appliedCoupon.discount) / 100;
+      setDiscount(calcCouponDiscount);
     }
   }, [subtotal, appliedCoupon]);
-  
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -103,8 +111,7 @@ const CheckoutPage = () => {
             cartItems={cartItems}
             update={setupdate}
             setPlacingOrder={setPlacingOrder}
-              appliedCoupon={appliedCoupon}  // ✅ pass it here
-
+            appliedCoupon={appliedCoupon} // Pass applied coupon
           />
         )}
 
@@ -132,10 +139,15 @@ const CheckoutPage = () => {
                       Type: {item.type || "default"}
                     </p>
                     <p className="text-sm text-gray-600">Qty: {item.qty}</p>
+                    <p className="text-sm text-gray-600">Discount: {item.discount}%</p>
                   </div>
+                  {/* <p className="font-bold">
+                    ₹{(item.price - (item.price * item.discount) / 100) * (item.qty || 1)}
+                  </p> */}
                   <p className="font-bold">
-                    ₹{(item.price || 0) * (item.qty || 1)}
-                  </p>
+  ₹{Math.floor((item.price - (item.price * item.discount) / 100) * (item.qty || 1))}
+</p>
+
                 </div>
               ))}
 
@@ -160,11 +172,7 @@ const CheckoutPage = () => {
                 {appliedCoupon && (
                   <p className="text-green-600 text-sm mt-1">
                     Coupon <strong>{appliedCoupon.code}</strong> applied (
-                    {appliedCoupon.discount}% off) 🎉 <br />
-                    {/* Celebrity:{" "} */}
-                    {/* <span className="font-medium">
-                      {appliedCoupon.celebrity}
-                    </span> */}
+                    {appliedCoupon.discount}% off) 🎉
                   </p>
                 )}
               </div>
@@ -172,30 +180,45 @@ const CheckoutPage = () => {
               {/* Totals */}
               <div className="flex justify-between border-t pt-3 font-semibold">
                 <span>Subtotal</span>
-                <span>₹{subtotal}</span>
+                <span>₹{baseprice}</span>
               </div>
+              {/* <div className="flex justify-between border-t pt-3 font-semibold">
+                <span>Discount (Item-Level)</span>
+                <span>₹{cartItems.reduce((sum, item) => (item.price * item.discount) / 100 * (item.qty || 1), 0)}</span>
+              </div> */}
+              <div className="flex justify-between border-t pt-3 font-semibold">
+  <span>Discount (Item-Level)</span>
+  <span>
+    ₹{Math.round(
+      cartItems.reduce(
+        (sum, item) => sum + ((item.price * item.discount) / 100) * (item.qty || 1),
+        0
+      )
+    )}
+  </span>
+</div>
+
               {discount > 0 && (
                 <div className="flex justify-between text-green-600 font-semibold">
-                  <span>Discount</span>
+                  <span>Coupon Discount</span>
                   <span>-₹{discount}</span>
                 </div>
               )}
               <div className="flex justify-between border-t pt-3 font-bold text-lg">
                 <span>Total</span>
-                <span>₹{total}</span>
+                <span>₹{Math.floor(total)}</span>
               </div>
             </div>
           )}
 
           {/* Place Order Button */}
           <button
-            onClick={() => setPayment(total)}
+            onClick={() => setPayment(Math.floor(total))}
             disabled={!selectedAddress || cartItems.length === 0 || placingOrder}
-            className={`w-full py-3 rounded-lg mt-4 transition ${
-              !selectedAddress || cartItems.length === 0 || placingOrder
+            className={`w-full py-3 rounded-lg mt-4 transition ${!selectedAddress || cartItems.length === 0 || placingOrder
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700 text-white"
-            }`}
+              }`}
           >
             {placingOrder ? "Placing Order..." : "Place Order"}
           </button>
