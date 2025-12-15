@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import SH2 from "../assets/SH2.png";
+import S2 from "../assets/SA3.webp";
 import SA1 from "../assets/SA1.webp";
 import icon3 from "../assets/icon3.png";
 import { useGetProductsQuery } from "../services/productsApi";  // ✅ RTK Query hook
@@ -129,11 +130,11 @@ function Products() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-3xl md:text-6xl font-bold mb-6 font-serif">
-              OUR PRODUCTS
+              OUR PRODUCT
             </h1>
             <ul className="list-decimal md:ml-10 space-y-0 md:space-y-3 text-xl md:text-3xl font-bold font-serif">
               <li>SAFFRON</li>
-              <li>SHILAJIT RESIN</li>
+              {/* <li>SHILAJIT RESIN</li> */}
             </ul>
           </motion.div>
 
@@ -152,7 +153,7 @@ function Products() {
               <img src={SA1} alt="Saffron" className="w-full h-full object-cover" />
             </div>
             <div className="w-40 md:w-80 rounded-xl overflow-hidden shadow-lg">
-              <img src={SH2} alt="Shilajit Resin" className="w-full h-full object-cover" />
+              <img src={S2} alt="Shilajit Resin" className="w-full h-full object-cover" />
             </div>
           </motion.div>
         </div>

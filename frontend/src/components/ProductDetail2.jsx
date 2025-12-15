@@ -39,9 +39,9 @@ function ProductCard() {
     <div className="w-full overflow-x-hidden">
       {/* Product Section */}
 
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-r from-[#374331] to-[#667D60] text-white px-6 md:px-12">
+      {/* <section className="relative min-h-[90vh] flex items-center bg-gradient-to-r from-[#374331] to-[#667D60] text-white px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Side: Text */}
+          
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -62,15 +62,14 @@ function ProductCard() {
             </p>
           </motion.div>
 
-          {/* Right Side: Image + Thumbnails */}
+          
           <motion.div
             className="relative flex flex-col items-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           >
-            {/* Main Image */}
-            {/* Main Image */}
+           
             <div className="w-full max-w-md">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <motion.img
@@ -83,7 +82,6 @@ function ProductCard() {
               </div>
             </div>
 
-            {/* Thumbnails */}
             <div className="flex gap-4 mt-6 flex-wrap justify-center">
               {thumbnails.map((img, index) => (
                 <motion.img
@@ -109,7 +107,7 @@ function ProductCard() {
           </motion.div>
         </div>
 
-        {/* Floating Leaf Icon */}
+      
         <motion.img
           src={icon3}
           alt="leaf"
@@ -117,13 +115,13 @@ function ProductCard() {
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
-      </section>
+      </section> */}
 
 
       {/* Related Images Section */}
-      <section className="py-12 bg-[#fff7ef] relative">
+      {/* <section className="py-12 bg-[#fff7ef] relative">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Heading */}
+          
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10 font-[cursive]"
             initial={{ opacity: 0, y: -40 }}
@@ -134,7 +132,7 @@ function ProductCard() {
             Related images
           </motion.h2>
 
-          {/* Decorative Icons */}
+          
           <motion.img
             src={icon}
             alt="Leaf Left"
@@ -154,7 +152,7 @@ function ProductCard() {
             viewport={{ once: true }}
           />
 
-          {/* Images Grid */}
+         
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
             {thumbnails.map((img, index) => (
               <motion.img
@@ -175,7 +173,7 @@ function ProductCard() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
 
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-r from-[#374331] to-[#667D60] text-white px-6 md:px-12">

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const PoliciesPreview = () => {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const policies = [
     {

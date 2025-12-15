@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SH2 from "../assets/SH2.png";
-import icon3 from "../assets/icon3.png";
+// import icon3 from "../assets/icon3.png";
 import saf3 from "../assets/saf3.jpg";
-import icon from "../assets/icon.png";
+// import icon from "../assets/icon.png";
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { Phone } from "lucide-react";
+// import { Phone } from "lucide-react";
 import { useEffect } from "react";
+import img from "../assets/SA4.webp"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -67,11 +68,12 @@ const Contact = () => {
               CONTACT US
             </h2>
             <p className="text-white text-base sm:text-lg lg:text-lg mb-4">
-              At <span className="font-semibold">SWACCHH</span>, we bring you the purity of nature through our
-              two premium products — <strong>Saffron</strong> and <strong>Shilajit</strong>.
-              Whether you’re curious about our sourcing process, looking for bulk orders,
-              or need product support, we’re always ready to assist you.
-            </p>
+  At <span className="font-semibold">SWACCHH</span>, we bring you the purity of nature through our
+  premium, handpicked <strong>Saffron</strong>. Whether you’re curious about our sourcing
+  process, looking for bulk orders, or need product support, we’re always here to
+  assist you with care and commitment.
+</p>
+
           </motion.form>
 
           {/* Right Image */}
@@ -83,7 +85,7 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <motion.img
-              src={SH2}
+              src={img}
               alt="spices"
               className="rounded-xl shadow-lg w-full max-w-sm sm:max-w-md"
               animate={{ y: [0, -10, 0] }}
@@ -161,10 +163,10 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               {[
-                { placeholder: "NAME", name: "name" },
-                { placeholder: "PHONE", name: "phone" },
-                { placeholder: "E-MAIL", name: "email" },
-                { placeholder: "SUBJECT", name: "subject" },
+                { placeholder: "Name", name: "name" },
+                { placeholder: "Phone", name: "phone" },
+                { placeholder: "E-Mail", name: "email" },
+                { placeholder: "Subject", name: "subject" },
               ].map((field, i) => (
                 <motion.input
                   key={i}
@@ -180,7 +182,7 @@ const Contact = () => {
 
               <motion.textarea
                 name="message"
-                placeholder="MESSAGE"
+                placeholder="Message"
                 rows="4"
                 className="w-full bg-[#667D60] text-white px-4 py-3 rounded-md focus:outline-none"
                 variants={fadeInUp}

@@ -7,24 +7,66 @@ import { motion } from "framer-motion";
 import saf3 from "../assets/saf3.jpg";
 import icon from "../assets/icon.png";
 import bg1 from "../assets/bg1.jpg";
-import prat from "../assets/prat.jpg";
+import prat from "../assets/profile.jpg";
 
 
 import { Link } from "react-router-dom";
-// import sa1 from "../assets/sa1.png";
-// import bg from "../assets/bg.jpg";
-// import logo from "../assets/logo.jpg";
-// import sidethree from "../assets/SA4.webp"
+
 import vec2 from "../assets/icon.png"
 import shi1 from "../assets/1.jpg";
 import { useEffect } from "react";
 
 import Greenbodythree from "./Greenbodythree";
+import user2 from "../assets/profile.jpg";
+import user3 from "../assets/profile.jpg";
+import user4 from "../assets/profile.jpg";
 
 
 
 
 export default function HomePage() {
+
+  
+// ⭐ Star SVG
+const Star = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#fbbf24"
+    viewBox="0 0 24 24"
+    className="w-5 h-5"
+  >
+    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.868 1.48 8.24L12 18.896l-7.416 4.518 1.48-8.24L0 9.306l8.332-1.151z" />
+  </svg>
+);
+
+// ⭐ Reviews Data
+const reviews = [
+  {
+    text: "I’ve been using Saffron daily and it helped me feel calmer and more positive. With Shilajit Resin, my energy improved naturally.",
+    name: "Veera Pratap",
+    img: prat,
+    rating: 5,
+  },
+  {
+    text: "The Saffron quality is pure and aromatic. It reduced my stress and improved sleep in days. Absolutely recommended!",
+    name: "Harshini",
+    img: user2,
+    rating: 4.5,
+  },
+  {
+    text: "Shilajit Resin boosted my stamina in a week. I feel active full day. Perfect natural supplement for busy life.",
+    name: "Rahul Mehta",
+    img: user3,
+    rating: 5,
+  },
+  {
+    text: "This combo improved my mood, energy, and sleep. Totally natural and effective. Loved the results!",
+    name: "Lokesh Nani",
+    img: user4,
+    rating: 5,
+  },
+];
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,11 +89,7 @@ export default function HomePage() {
 
 
       <section>
-        {/* <img
-    // src={icon}
-    alt="Leaf Decoration"
-    className="absolute right-6 top-10 transform -translate-y-1/2 w-16 md:w-24 opacity-90"
-  /> */}
+        
         <div className="card shadow-lg bg-[#FFF7EC] w-full h-full flex flex-col lg:flex-row justify-center gap-10 p-6 lg:p-20">
 
           {/* Left Side */}
@@ -118,79 +156,49 @@ export default function HomePage() {
 
       
 
-      <section className="relative py-16 sm:py-20 bg-[#f8f5ee] max-w-full mx-auto px-4 sm:px-8 rounded-xl shadow-lg overflow-hidden">
-        {/* Decorative leaf on right side */}
-        {/* Decorative leaf on right side */}
-        {/* Decorative leaf on right side */}
-        <motion.img
-          src={icon}
-          alt="Leaf Decoration"
-          className="absolute right-2 sm:right-10 
-             top-[80%] sm:top-1/2 
-             transform -translate-y-1/2 
-             w-12 sm:w-24 opacity-90"
-          initial={{ rotate: -20, opacity: 0, x: 50 }}
-          whileInView={{ rotate: 0, opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        />
+      <div className="py-16 bg-[#f8f5ee]">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
+        What Our Customers Say
+      </h2>
 
-
-
-        {/* Quote Icon */}
-        <motion.div
-          className="text-green-600 text-6xl sm:text-9xl mb-4 sm:mb-6"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, type: "spring" }}
-          viewport={{ once: true }}
-        >
-          &#10078;
-        </motion.div>
-
-        {/* Quote Text */}
-        <motion.div
-          className="flex flex-col items-center text-center"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-base sm:text-2xl font-semibold text-gray-900 max-w-md sm:max-w-5xl leading-relaxed mb-6 sm:mb-8 px-2">
-            I’ve been using{" "}
-            <span className="italic text-green-700 font-semibold">Saffron</span>{" "}
-            to lift my mood and it’s truly helped me feel calmer every day.
-            Alongside it,{" "}
-            <span className="italic text-green-700 font-semibold">
-              Shilajit Resin
-            </span>{" "}
-            has given me natural energy and stamina like never before. Together,
-            they feel like nature’s perfect balance for both mind and body.
-          </p>
-
-          {/* Profile Section */}
+      {/* Grid of Review Cards */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-6 max-w-7xl mx-auto">
+        {reviews.map((review, index) => (
           <motion.div
-            className="flex flex-col items-center gap-3 sm:gap-4"
-            initial={{ opacity: 0, y: 30 }}
+            key={index}
+            className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-all duration-300"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <motion.img
-              src={prat}
-              alt="Profile"
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-4 border-[#f8f5ee]"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8, type: "spring" }}
-              viewport={{ once: true }}
+            {/* Profile Image */}
+            <img
+              src={review.img}
+              alt={review.name}
+              className="w-20 h-20 rounded-full object-cover border-4 border-[#f8f5ee] mb-4"
             />
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900">
-              Veera Pratap
+
+            {/* Name */}
+            <h3 className="text-lg font-bold text-gray-900 mb-1">
+              {review.name}
             </h3>
+
+            {/* Stars */}
+            <div className="flex justify-center gap-1 mb-3">
+              {Array.from({ length: review.rating }).map((_, i) => (
+                <Star key={i} />
+              ))}
+            </div>
+
+            {/* Review Text */}
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {review.text}
+            </p>
           </motion.div>
-        </motion.div>
-      </section>
+        ))}
+      </div>
+    </div>
 
 
 

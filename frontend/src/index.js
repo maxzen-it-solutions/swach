@@ -56,6 +56,7 @@ import Refundpolicypage from "./components/Refundpolicypage";
 import Returnpolicypage from "./components/Returnpolicypage";
 import Shippingpolicypage from "./components/Shippingpolicypage";
 import Privacypolicypage from "./components/Privacypolicypage";
+import Exploreplans from "./components/Exploreplans";
 // 🔹 ProtectedRoute Component
 const ProtectedRoute = ({ children, role }) => {
   const token = localStorage.getItem("token");
@@ -94,6 +95,7 @@ const router = createBrowserRouter([
       {path: "Returnpolicypage", element: <Returnpolicypage /> },
       {path: "Shippingpolicypage", element: <Shippingpolicypage/> },
       {path: "Privacypolicypage", element: <Privacypolicypage /> },
+      {path: "Exploreplans", element: <Exploreplans /> }, // Catch-all route
     
     ],
   },
